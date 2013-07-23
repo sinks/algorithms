@@ -1,7 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.7 FATAL_ERROR)
 
 #SET(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++ -Wall")
-SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall")
+SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -g")
 
 PROJECT(LinkedList)
 
