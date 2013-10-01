@@ -12,6 +12,11 @@ ADD_DEPENDENCIES(LinkedListTest googletest linkedlist)
 
 ExternalProject_Get_Property(googletest binary_dir)
 
+if(UNIX)
+    set(PTHREAD "-pthread")
+endif()
+
 TARGET_LINK_LIBRARIES(LinkedListTest
-                      ${LinkedList_BINARY_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}linkedlist.dylib
-                      ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest.a )#${CMAKE_FIND_LIBRARY_SUFFIXES})
+    ${LinkedList_BINARY_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}linkedlist.so
+    ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest.a
+    ${PTHREAD})
