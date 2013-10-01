@@ -14,7 +14,7 @@ class Element {
 
     public:
         Element();
-        ~Element();
+        //~Element();
         
         // Getters
         Type *data();
@@ -30,12 +30,6 @@ Element<Type>::Element() {
     this->m_next = nullptr;
     this->m_data = nullptr;
 }
-
-template <class Type>
-Element<Type>::~Element() {
-    std::cout << "destroyed\n";
-}
-
 
 template <class Type>
 Type *Element<Type>::data() {

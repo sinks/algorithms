@@ -11,6 +11,15 @@ INCLUDE(ExternalProject)
 
 SET_DIRECTORY_PROPERTIES(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/external)
 
+
+add_custom_target(doc
+${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+COMMENT "Generating API documentation with Doxygen" VERBATIM
+)
+
+option(GTEST_UPDATE "GTEST_UPDATE" OFF)
+if(GTEST_UPDATE)
 ExternalProject_Add(
     googletest
     SVN_REPOSITORY  http://googletest.googlecode.com/svn/trunk/
@@ -26,6 +35,25 @@ ExternalProject_Add(
     LOG_CONFIGURE ON
     LOG_BUILD ON
 )
+else()
+ExternalProject_Add(
+    googletest
+    SVN_REPOSITORY  http://googletest.googlecode.com/svn/trunk/
+    #URL http://googletest.googlecode.com/files/gtest-1.6.0.zip    
+    #TIMEOUT 10
+    # Force separate output paths for debug and release builds to allow easy
+    # identification of correct lib in subsequent TARGET_LINK_LIBRARIES commands
+    CMAKE_ARGS -Dgtest_force_shared_crt=ON
+    # Disable install step
+    INSTALL_COMMAND ""
+    # Disble update step
+    UPDATE_COMMAND ""
+    # Wrap download, configure and build steps in a script to log output
+    LOG_DOWNLOAD ON
+    LOG_CONFIGURE ON
+    LOG_BUILD ON
+)
+endif()
 
 
 

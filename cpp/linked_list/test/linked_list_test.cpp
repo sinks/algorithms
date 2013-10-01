@@ -44,15 +44,30 @@ TEST(LinkedList, Size) {
     ASSERT_EQ(0, list.size());
 
     int test1 = 12;
-    Element<int> *returnedElement = list.push(test1);
+    list.push(test1);
     
     ASSERT_EQ(1, list.size());
     
     list.pop();
 
     ASSERT_EQ(0, list.size());
-    
 
+    list.push(test1);
+    list.push(test1);
+    ASSERT_EQ(2, list.size());
+
+    list.pop();
+    ASSERT_EQ(1, list.size());
+    list.pop();
+    ASSERT_EQ(0, list.size());
+    list.pop();
+    ASSERT_EQ(0, list.size());
+    list.pop();
+    ASSERT_EQ(0, list.size());
+    list.push(test1);
+    ASSERT_EQ(1, list.size());
+    list.pop();
+    ASSERT_EQ(0, list.size());
 }
 
 
