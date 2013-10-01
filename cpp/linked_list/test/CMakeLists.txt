@@ -12,12 +12,14 @@ ADD_EXECUTABLE(LinkedListTest ${PROJECT_SOURCE_DIR}/linked_list_test.cpp)
 
 ADD_DEPENDENCIES(LinkedListTest googletest linkedlist)
 
-
-if(UNIX)
+if(APPLE)
+    set(CMAKE_FIND_LIBRARY_SUFFIXES .dylib)
+elseif(UNIX)
     set(PTHREAD "-pthread")
+    set(CMAKE_FIND_LIBRARY_SUFFIXES .so)
 endif()
 
 TARGET_LINK_LIBRARIES(LinkedListTest
-    ${LinkedList_BINARY_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}linkedlist.so
+    ${LinkedList_BINARY_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}linkedlist${CMAKE_FIND_LIBRARY_SUFFIXES}
     ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest.a
     ${PTHREAD})
