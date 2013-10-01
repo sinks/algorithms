@@ -1,9 +1,15 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.7 FATAL_ERROR)
-
-SET(CMAKE_C_COMPILER_INIT "/opt/local/bin/clang-mp-3.3")
-SET(CMAKE_CXX_COMPILER_INIT "/opt/local/bin/clang++-mp-3.3")
-set(CMAKE_C_COMPILER "/opt/local/bin/clang-mp-3.3")  
-set(CMAKE_CXX_COMPILER "/opt/local/bin/clang++-mp-3.3")
+if(APPLE)
+  SET(CMAKE_C_COMPILER_INIT "/opt/local/bin/clang-mp-3.3")
+  SET(CMAKE_CXX_COMPILER_INIT "/opt/local/bin/clang++-mp-3.3")
+  set(CMAKE_C_COMPILER "/opt/local/bin/clang-mp-3.3")  
+  set(CMAKE_CXX_COMPILER "/opt/local/bin/clang++-mp-3.3")
+elseif(UNIX)
+  SET(CMAKE_C_COMPILER_INIT "clang")
+  SET(CMAKE_CXX_COMPILER_INIT "clang++")
+  set(CMAKE_C_COMPILER "clang")
+  set(CMAKE_CXX_COMPILER "clang++")
+endif()
 
 PROJECT(Algorithms)
 

@@ -13,6 +13,11 @@ ADD_EXECUTABLE(LinkedListTest ${PROJECT_SOURCE_DIR}/linked_list_test.cpp)
 ADD_DEPENDENCIES(LinkedListTest googletest linkedlist)
 
 
+if(UNIX)
+    set(PTHREAD "-pthread")
+endif()
+
 TARGET_LINK_LIBRARIES(LinkedListTest
-                      ${LinkedList_BINARY_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}linkedlist.dylib
-                      ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest.a )
+    ${LinkedList_BINARY_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}linkedlist.so
+    ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest.a
+    ${PTHREAD})
